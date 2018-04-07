@@ -34,5 +34,6 @@ Technologies used - PHP5, JSON, MYSQL
         }else{
         	echo "0";
         }
+        mysqli_close($conn);
 
       ?>

@@ -1,29 +1,43 @@
 <?php
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////   *                *               *                 Author:Hishan Indrajith           *         *             *           *           ////
+////          *                *             *            University of Peradeniya                                                          ////
+////                                                 hishan.indrajith.95hia@gmail.com         *             *            *                  ////   
+////      *              *             *                        17-03-2018             *              *             *            *          ////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////                                                                                             /////////////////////////
+//////////////////////////     PROJECT - NETWORKED AND AUTOMATED WEATHER MONITORING AND ALERTING SYSTEM - GROUP 04     /////////////////////////
+//////////////////////////                                                                                             /////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /*Long Polling PHP server script for live temperature and humidity updates.
 This server side php returns a json array abject containing the new temperature and humidity updates at the database. 
 The script uses long polling technology.
 The last time of update is saved in a file in server. clients must send a HTTP GET request containing the last time client was updated as soon as an update happen using AJAX.
 This script waits for a new server update and notify the client through a JSON object containing new data and the updated time.
 So front end will be updated with live data.
-
-Author:Hishan Indrajith ** 
-University of Peradeniya **
-hishan.indrajith.95hia@gmail.com **
-17-03-2018
-
 Technologies used - PHP5, JSON, MYSQL, Long Polling Concept
 */
 set_time_limit(0); // maximum execution time is set unlimited
 require "conn.php";
+$script_start_time=time();
 echo poll($_GET['summary_last_updated_time'],$conn);
+mysqli_close($conn);
 function poll($summary_last_updated_time,$conn){
     // 
     $server_updated_time = file_get_contents('summary.txt');
     //
     if($server_updated_time == $summary_last_updated_time){
-        // 
         sleep(1); 
-        return poll($summary_last_updated_time,$conn);
+        if(time()<$GLOBALS['script_start_time']+600){ //stop script after 10 minutes
+           return poll($summary_last_updated_time,$conn);
+        }else{
+            return '0';
+        }
+        
     }else{
         date_default_timezone_set("Asia/Colombo");
         $date = date("Y-m-d");
