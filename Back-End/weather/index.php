@@ -26,6 +26,7 @@ Technologies used - PHP5, JSON, MYSQL, AJAX, Java Script
   <title>Weather Online</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="icons/icon.png" />
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -927,6 +928,15 @@ Technologies used - PHP5, JSON, MYSQL, AJAX, Java Script
         }
     }
 
+    function live(isLive){
+      var liveBtn = document.getElementById("livebtn");
+      if(isLive==1){
+        liveBtn.style.visibility = "visible"; 
+      }else if(isLive==0){
+        liveBtn.style.visibility = "hidden"; 
+      }
+    }
+
   </script>
   <!--script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -1032,46 +1042,46 @@ Technologies used - PHP5, JSON, MYSQL, AJAX, Java Script
       <a class="navbar-brand" href="">Weather Online</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a data-toggle="tab" href="#summary">Summary</a></li>
+      <li class="active"><a data-toggle="tab" href="#summary" onclick="live(1)">Summary</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Temperature
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a data-toggle="tab" href="#temp1">Today's Chart</a></li>
-          <li><a data-toggle="tab" href="#temp2">Chart by day</a></li>
-          <li><a data-toggle="tab" href="#temp3">Annual Summary</a></li>
+          <li><a data-toggle="tab" href="#temp1" onclick="live(1)">Today's Chart</a></li>
+          <li><a data-toggle="tab" href="#temp2" onclick="live(0)">Chart by day</a></li>
+          <li><a data-toggle="tab" href="#temp3" onclick="live(0)">Annual Summary</a></li>
         </ul>
       </li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Humidity
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a data-toggle="tab" href="#hum1">Today's Chart</a></li>
-          <li><a data-toggle="tab" href="#hum2">Chart by day</a></li>
-          <li><a data-toggle="tab" href="#hum3">Annual Summary</a></li>
+          <li><a data-toggle="tab" href="#hum1" onclick="live(1)">Today's Chart</a></li>
+          <li><a data-toggle="tab" href="#hum2" onclick="live(0)">Chart by day</a></li>
+          <li><a data-toggle="tab" href="#hum3" onclick="live(0)">Annual Summary</a></li>
         </ul>
       </li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#rain">RainFall
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a data-toggle="tab" href="#rain1">Today's Chart</a></li>
-          <li><a data-toggle="tab" href="#rain2">Chart by day</a></li>
-          <li><a data-toggle="tab" href="#rain3">Annual Summary</a></li>
+          <li><a data-toggle="tab" href="#rain1" onclick="live(1)">Today's Chart</a></li>
+          <li><a data-toggle="tab" href="#rain2" onclick="live(0)">Chart by day</a></li>
+          <li><a data-toggle="tab" href="#rain3" onclick="live(0)">Annual Summary</a></li>
         </ul>
       </li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#wind">Wind Speed
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a data-toggle="tab" href="#wind1">Today's Chart</a></li>
-          <li><a data-toggle="tab" href="#wind2">Chart by day</a></li>
-          <li><a data-toggle="tab" href="#wind3">Annual Summary</a></li>
+          <li><a data-toggle="tab" href="#wind1" onclick="live(1)">Today's Chart</a></li>
+          <li><a data-toggle="tab" href="#wind2" onclick="live(0)">Chart by day</a></li>
+          <li><a data-toggle="tab" href="#wind3" onclick="live(0)">Annual Summary</a></li>
         </ul>
       </li>
     </ul>
 
-    <button type="button" style="margin-bottom: 10px" class="btn btn-primary navbar-btn" onclick="loadTable()"><i class="glyphicon glyphicon-question-sign"></i> Help</button>
+    <button type="button" style="margin-bottom: 10px" class="btn btn-success navbar-btn" onclick="loadTable()"><i class="glyphicon glyphicon-question-sign"></i> Help</button>
 
     <form class="navbar-form navbar-left" onsubmit="location_selected();return false">
       <div class="input-group">
@@ -1084,6 +1094,9 @@ Technologies used - PHP5, JSON, MYSQL, AJAX, Java Script
         </div>
       </div> 
     </form>
+
+    <button type="button"  id="livebtn" style="margin-bottom: 10px" class="btn btn-primary navbar-btn" onclick="loadTable()">LIVE</button>
+
     <ul class="nav navbar-nav navbar-right">
       <li><a id="location_txt"><span class="glyphicon glyphicon-map-marker"></span></a></li>
     </ul>

@@ -21,7 +21,7 @@ This script waits for a new server update and notify the client through a JSON o
 So front end will be updated with live data.
 Technologies used - PHP5, JSON, MYSQL, Long Polling Concept
 */
-set_time_limit(0); // maximum execution time is set unlimited
+ini_set('max_execution_time', 0); // maximum execution time is set unlimited
 require "conn.php";
 $script_start_time=time();
 echo poll($_GET['summary_last_updated_time'],$conn);
